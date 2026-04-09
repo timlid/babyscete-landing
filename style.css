@@ -7,16 +7,15 @@
 html, body {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  min-height: 100dvh;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background: #0d0d0d;
 }
 
 /* ── Blurred background ── */
@@ -26,131 +25,108 @@ body {
   background-image: url('images/photo_2026-04-07_06-01-00.jpg');
   background-size: cover;
   background-position: top center;
-  filter: blur(32px) brightness(0.35) saturate(1.2);
+  filter: blur(40px) brightness(0.25) saturate(1.2);
   z-index: 0;
 }
 
-.bg-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  z-index: 1;
-}
-
-/* ── Page ── */
+/* ── Page: full screen, no scroll ── */
 .page {
   position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 400px;
-  padding: 56px 24px;
-  padding-top: max(56px, env(safe-area-inset-top, 56px));
-  padding-bottom: max(48px, env(safe-area-inset-bottom, 48px));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100dvh;
-}
-
-/* ── Avatar ── */
-.avatar-wrap {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  flex-shrink: 0;
-}
-
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  border-radius: 50%;
-  display: block;
-  position: relative;
   z-index: 1;
-}
-
-/* Animated gradient ring */
-.avatar-ring {
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f9a8d4, #c084fc, #60a5fa, #34d399, #f9a8d4);
-  background-size: 300% 300%;
-  animation: ringRotate 4s linear infinite;
-  z-index: 0;
-}
-
-@keyframes ringRotate {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ── Profile ── */
-.profile {
-  margin-top: 18px;
-  text-align: center;
-}
-
-.username {
-  font-size: 24px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.4px;
-}
-
-.bio {
-  margin-top: 6px;
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  font-weight: 300;
-}
-
-/* ── Links ── */
-.links {
-  margin-top: 32px;
   width: 100%;
+  max-width: 430px;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.btn {
-  display: flex;
   align-items: center;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── Photo: fills all available space ── */
+.photo-wrap {
+  flex: 1;
   width: 100%;
-  padding: 0 20px;
-  height: 58px;
-  border-radius: 18px;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.btn:active {
-  transform: scale(0.97);
-  opacity: 0.85;
-}
-
-.btn-left {
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 16px 16px 0;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  border-radius: 20px;
+  display: block;
+}
+
+/* ── Bottom section ── */
+.bottom {
+  width: 100%;
+  flex-shrink: 0;
+  padding: 14px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.username {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.bio {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+/* ── Telegram button ── */
+.btn-tg {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 54px;
+  padding: 0 18px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  -webkit-tap-highlight-color: transparent;
+  animation: pulse 2s ease-in-out infinite;
+  transition: transform 0.15s ease;
+}
+
+.btn-tg:active {
+  transform: scale(0.97);
+}
+
+.btn-icon {
   width: 32px;
   height: 32px;
-  border-radius: 10px;
+  border-radius: 9px;
+  background: #2AABEE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.btn-left svg {
-  width: 18px;
-  height: 18px;
+.btn-icon svg {
+  width: 17px;
+  height: 17px;
 }
 
 .btn-label {
@@ -160,43 +136,27 @@ body {
 }
 
 .btn-arrow {
-  font-size: 16px;
-  opacity: 0.6;
+  font-size: 15px;
+  opacity: 0.5;
 }
 
-/* ── Telegram button with pulse ── */
-.btn-tg {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #fff;
-  position: relative;
-  animation: btnPulse 2s ease-in-out infinite;
-}
-
-.btn-tg .btn-left {
-  background: #2AABEE;
-  color: #fff;
-}
-
-@keyframes btnPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(42, 171, 238, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 0 12px rgba(42, 171, 238, 0);
-  }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(42, 171, 238, 0.45); }
+  50%       { box-shadow: 0 0 0 10px rgba(42, 171, 238, 0); }
 }
 
 /* ── Desktop ── */
 @media (min-width: 600px) {
+  body { background: #111; }
+
   .page {
-    min-height: unset;
-    padding: 56px 32px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 32px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    height: min(860px, 95dvh);
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+  }
+
+  .photo-wrap {
+    padding: 20px 20px 0;
   }
 }

@@ -7,161 +7,228 @@
 html, body {
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  background: #000;
 }
 
 body {
   font-family: 'Inter', sans-serif;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* ── Full-screen slider ── */
-.slider {
-  position: relative;
-  width: 100%;
-  height: 100dvh;
   overflow: hidden;
+  background: #0d0d0d;
 }
 
-.slides {
-  display: flex;
+/* ── Blurred background ── */
+.bg {
+  position: fixed;
+  inset: -40px;
+  background-image: url('images/photo_2026-04-07_06-01-00.jpg');
+  background-size: cover;
+  background-position: top center;
+  filter: blur(32px) brightness(0.35) saturate(1.2);
+  transition: background-image 0.7s ease;
+  z-index: 0;
+}
+
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+/* ── Page ── */
+.page {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  height: 100%;
-  will-change: transform;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 400px;
+  padding: 48px 24px;
+  padding-top: max(56px, env(safe-area-inset-top, 56px));
+  padding-bottom: max(48px, env(safe-area-inset-bottom, 48px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
 }
 
-.slide {
-  min-width: 100%;
-  height: 100%;
+/* ── Avatar ── */
+.avatar-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
 }
 
-.slide img {
+.avatar-slides {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.avatar-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  display: block;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
   pointer-events: none;
   -webkit-user-drag: none;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
-/* ── Gradient overlay ── */
-.overlay {
+.avatar-img.active {
+  opacity: 1;
+}
+
+/* Animated gradient ring */
+.avatar-ring {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 40%,
-    rgba(0,0,0,0.3) 65%,
-    rgba(0,0,0,0.75) 85%,
-    rgba(0,0,0,0.9) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f9a8d4, #c084fc, #60a5fa, #34d399, #f9a8d4);
+  background-size: 300% 300%;
+  animation: ringRotate 4s linear infinite;
+  z-index: -1;
+}
+
+@keyframes ringRotate {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* ── Dots ── */
 .dots {
-  position: absolute;
-  top: max(18px, env(safe-area-inset-top, 18px));
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   gap: 5px;
-  z-index: 3;
+  margin-top: 14px;
 }
 
 .dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255,255,255,0.3);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .dot.active {
   background: #fff;
-  width: 18px;
+  width: 16px;
   border-radius: 3px;
 }
 
-/* ── Bottom content ── */
-.bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0 24px;
-  padding-bottom: max(36px, env(safe-area-inset-bottom, 36px));
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+/* ── Profile ── */
+.profile {
+  margin-top: 18px;
+  text-align: center;
 }
 
 .username {
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   color: #fff;
-  letter-spacing: -0.5px;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  letter-spacing: -0.4px;
 }
 
 .bio {
+  margin-top: 6px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255,255,255,0.5);
   font-weight: 300;
-  margin-bottom: 6px;
 }
 
-/* ── Telegram button ── */
-.btn-telegram {
+/* ── Links ── */
+.links {
+  margin-top: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  height: 58px;
+  border-radius: 18px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.btn:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+
+.btn-left {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 16px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%);
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  text-decoration: none;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.btn-telegram:active {
-  transform: scale(0.97);
-  opacity: 0.9;
-}
-
-.btn-telegram svg {
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
   flex-shrink: 0;
 }
 
-/* ── Desktop: constrain to phone shape ── */
-@media (min-width: 600px) {
-  body {
-    background: #111;
-  }
+.btn-left svg {
+  width: 18px;
+  height: 18px;
+}
 
-  .slider {
-    width: 390px;
-    height: min(844px, 95dvh);
-    border-radius: 40px;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.7);
-    overflow: hidden;
+.btn-label {
+  flex: 1;
+  text-align: center;
+  margin-right: 32px;
+}
+
+.btn-arrow {
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+/* Telegram */
+.btn-tg {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.btn-tg .btn-left {
+  background: #2AABEE;
+  color: #fff;
+}
+
+.btn-tg:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+/* ── Desktop ── */
+@media (min-width: 600px) {
+  .page {
+    min-height: unset;
+    padding: 56px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 32px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
   }
 }

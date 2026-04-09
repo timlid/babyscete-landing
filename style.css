@@ -7,64 +7,23 @@
 html, body {
   height: 100%;
   width: 100%;
+  overflow: hidden;
+  background: #000;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  min-height: 100dvh;
-  background: #0a0a0a;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden;
+}
+
+/* ── Full-screen slider ── */
+.slider {
   position: relative;
-}
-
-/* Blurred background */
-.bg-blur {
-  position: fixed;
-  inset: 0;
-  background-size: cover;
-  background-position: center top;
-  background-image: url('images/photo_2026-04-07_06-01-00.jpg');
-  filter: blur(40px) brightness(0.3) saturate(1.4);
-  transform: scale(1.1);
-  transition: background-image 0.8s ease;
-  z-index: 0;
-}
-
-/* ── Desktop layout ── */
-.container {
-  position: relative;
-  z-index: 1;
   width: 100%;
-  max-width: 400px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100dvh;
-}
-
-.card {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 28px;
+  height: 100dvh;
   overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-}
-
-/* ── Photo Slider ── */
-.photo-slider {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 .slides {
@@ -89,160 +48,120 @@ body {
   display: block;
   pointer-events: none;
   -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-/* Dots */
+/* ── Gradient overlay ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0,0,0,0.3) 65%,
+    rgba(0,0,0,0.75) 85%,
+    rgba(0,0,0,0.9) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Dots ── */
 .dots {
   position: absolute;
-  bottom: 14px;
+  top: max(18px, env(safe-area-inset-top, 18px));
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 6px;
-  z-index: 2;
+  gap: 5px;
+  z-index: 3;
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .dot.active {
   background: #fff;
-  width: 20px;
+  width: 18px;
   border-radius: 3px;
 }
 
-/* Profile */
-.profile {
-  padding: 20px 24px 6px;
-  text-align: center;
+/* ── Bottom content ── */
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 24px;
+  padding-bottom: max(36px, env(safe-area-inset-bottom, 36px));
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .username {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
   color: #fff;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
 }
 
 .bio {
-  margin-top: 5px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.65);
   font-weight: 300;
+  margin-bottom: 6px;
 }
 
-/* Links */
-.links {
-  padding: 14px 20px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.btn {
+/* ── Telegram button ── */
+.btn-telegram {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 15px 20px;
-  border-radius: 14px;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  cursor: pointer;
-  border: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btn:active {
-  transform: scale(0.96);
-}
-
-.btn-telegram {
+  padding: 16px;
+  border-radius: 16px;
   background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%);
   color: #fff;
-  box-shadow: 0 8px 24px rgba(42, 171, 238, 0.35);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-.btn-telegram:hover {
-  box-shadow: 0 12px 32px rgba(42, 171, 238, 0.5);
-  transform: translateY(-1px);
+.btn-telegram:active {
+  transform: scale(0.97);
+  opacity: 0.9;
 }
 
-.btn-icon {
+.btn-telegram svg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
 }
 
-/* Footer */
-.footer {
-  padding: 0 24px 18px;
-  text-align: center;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.2);
-  font-weight: 300;
-}
-
-/* ── Mobile: full-screen card ── */
-@media (max-width: 480px) {
+/* ── Desktop: constrain to phone shape ── */
+@media (min-width: 600px) {
   body {
-    align-items: flex-start;
+    background: #111;
   }
 
-  .container {
-    padding: 0;
-    min-height: 100dvh;
-    align-items: stretch;
+  .slider {
+    width: 390px;
+    height: min(844px, 95dvh);
+    border-radius: 40px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+    overflow: hidden;
   }
-
-  .card {
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    min-height: 100dvh;
-  }
-
-  .photo-slider {
-    aspect-ratio: unset;
-    flex: 1;
-    min-height: 0;
-  }
-
-  .profile {
-    padding: 18px 20px 4px;
-  }
-
-  .username {
-    font-size: 20px;
-  }
-
-  .links {
-    padding: 12px 16px 16px;
-  }
-
-  .btn {
-    padding: 15px 16px;
-    font-size: 15px;
-    border-radius: 12px;
-  }
-
-  .footer {
-    padding-bottom: max(16px, env(safe-area-inset-bottom));
-  }
-}
-
-/* Very small screens */
-@media (max-width: 360px) {
-  .username { font-size: 18px; }
-  .btn { font-size: 14px; }
 }

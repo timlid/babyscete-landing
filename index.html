@@ -6,53 +6,101 @@
   <title>babyscete</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Mesh background -->
-  <div class="mesh">
-    <div class="mesh-blob b1"></div>
-    <div class="mesh-blob b2"></div>
-    <div class="mesh-blob b3"></div>
+  <div class="bg-blur">
+    <img src="images/render-16.jpg" alt="" />
   </div>
-  <div class="grain"></div>
 
   <div class="page">
 
-    <!-- Avatar -->
-    <div class="avatar-wrap">
-      <div class="avatar-ring"></div>
-      <img class="avatar" src="images/photo_2026-04-09_16-55-53.jpg" alt="babyscete" />
+    <!-- Hero photo with text overlay -->
+    <div class="hero">
+      <img src="images/render-13.jpg" alt="babyscete" class="hero-img" />
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        <h1 class="username">MILACOW ˖°🌸</h1>
+        <p class="handle">@milacow</p>
+        <div class="social-icons">
+          <a href="https://t.me/babyscete" target="_blank" class="social-icon tg-icon-btn" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/mileacow/" target="_blank" class="social-icon ig-icon-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <!-- Profile -->
-    <div class="profile">
-      <h1 class="username">babyscete</h1>
-      <p class="bio">my world ♡</p>
-    </div>
+    <!-- Content section -->
+    <div class="content">
 
-    <!-- Divider -->
-    <div class="divider"></div>
+      <!-- Photo card link -->
+      <div class="photo-card" onclick="showDisclaimer()">
+        <div class="card-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </div>
+        <img src="images/render-16.jpg" alt="" class="card-img" />
+        <div class="card-label">🔥 FREE TRIAL (only today)</div>
+      </div>
 
-    <!-- Quote -->
-    <div class="quote-block">
-      <p class="quote-main">You found me.<br/>The real me.</p>
-      <p class="quote-sub">Instagram shows you the aesthetic. Here, there are no filters — only what I actually think, feel, and create</p>
-    </div>
-
-    <!-- Links -->
-    <div class="links">
+      <!-- Telegram button -->
       <a href="https://t.me/babyscete" target="_blank" class="btn-tg">
-        <svg class="tg-icon" viewBox="0 0 24 24" fill="currentColor">
+        <svg class="tg-btn-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
         </svg>
-        my tg channel🌸
+        my tg channel 🌸
       </a>
+
+      <!-- Charity button -->
+      <a href="https://www.bcrf.org/other-ways-give/" target="_blank" class="btn-charity">
+        <span class="charity-icon">🎀</span>
+        <span class="charity-text">Donate to Breast Cancer Research | BCRF</span>
+      </a>
+
     </div>
 
   </div>
+
+  <!-- Disclaimer modal -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal-box">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+        </svg>
+      </div>
+      <h2 class="modal-title">Mature Content Disclaimer</h2>
+      <p class="modal-text">This link may contain graphic or adult content.</p>
+      <a href="https://www.fanvue.com/baby_megan" target="_blank" class="modal-btn" onclick="closeModalDirect()">Continue (18+)</a>
+    </div>
+  </div>
+
+  <script>
+    function showDisclaimer() {
+      document.getElementById('modal').classList.add('active');
+    }
+    function closeModal(e) {
+      if (e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('active');
+      }
+    }
+    function closeModalDirect() {
+      document.getElementById('modal').classList.remove('active');
+    }
+  </script>
 
 </body>
 </html>
